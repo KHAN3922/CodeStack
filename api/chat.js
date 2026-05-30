@@ -1,7 +1,5 @@
 // api/chat.js — Vercel Serverless Function (Gemini Version)
-// ✅ FREE — Google Gemini API
-// ✅ API key hidden in Vercel environment variables
-// ✅ CORS headers included
+// ✅ Fixed model name to gemini-2.0-flash
 
 export default async function handler(req, res) {
 
@@ -27,8 +25,9 @@ export default async function handler(req, res) {
       parts: [{ text: msg.content }]
     }));
 
+    // ✅ FIXED: Updated to gemini-2.0-flash (latest free model)
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,3 +71,4 @@ Always wrap code in markdown fenced blocks with the language name. Be concise bu
     return res.status(500).json({ error: "Server error: " + err.message });
   }
 }
+
